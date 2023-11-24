@@ -1,6 +1,7 @@
 package br.com.unifalmg.blog.service;
 
 import br.com.unifalmg.blog.entity.User;
+import br.com.unifalmg.blog.exception.InvalidUserException;
 import br.com.unifalmg.blog.exception.UserNotFoundException;
 import br.com.unifalmg.blog.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,16 @@ public class UserService {
         }
         throw new UserNotFoundException(
                 String.format("No user found for id %d", id));
+    }
+
+    public User add(User user) {
+        if (Objects.isNull(user)
+                || Objects.isNull(user.getName())
+                || Objects.isNull(user.getUsername())
+                || Objects.isNull(user.getEmail())) {
+            throw new InvalidUserException();
+        }
+        return repository.save(user);
     }
 
 }
