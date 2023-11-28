@@ -14,6 +14,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.util.Assert;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,14 +43,14 @@ public class UserServiceTest {
     void test2() {
         when(repository.findById(1)).thenReturn(Optional.of(User.builder()
                     .id(1)
-                    .name("Fellipe")
-                    .username("felliper")
+                    .name("Tiago")
+                    .username("Tiago")
                 .build()));
         User response = service.findById(1);
         assertAll(
                 () -> assertEquals(1, response.getId()),
-                () -> assertEquals("Fellipe", response.getName()),
-                () -> assertEquals("felliper", response.getUsername())
+                () -> assertEquals("Tiago", response.getName()),
+                () -> assertEquals("Tiago", response.getUsername())
         );
     }
 
@@ -61,5 +64,39 @@ public class UserServiceTest {
 
 
     // TODO: Implement test cases for getAllUsers
+    @Test
+    @DisplayName("getAllUsers > When the repository is empty > Return a empty list")
+    void getAllUsersWhenTheRepositoryIsEmptyReturnAEmptyList() {
+        when(repository.findAll()).thenReturn(Collections.emptyList());
+
+        List<User> result = service.getAllUsers();
+
+        assertTrue(result.isEmpty());
+    }
+
+
+    @Test
+    @DisplayName("getAllUsers > When all fields is corrects > Return the users")
+    void getAllUsersWhenAllFieldsIsCorrectsReturnTheUsers() {
+        when(repository.findAll()).thenReturn(Arrays.asList(
+                User.builder()
+                    .id(1)
+                    .name("Tiago")
+                    .username("Tiago")
+                    .build(),
+                User.builder()
+                     .id(2)
+                     .name("Luiz")
+                     .username("Luiz")
+                    .build()));
+
+        List<User> userList = service.getAllUsers();
+
+        assertAll(
+                () -> assertEquals(2, userList.size()),
+                () -> assertEquals("Tiago", userList.get(0).getName()),
+                () -> assertEquals("Tiago", userList.get(0).getUsername()),
+                () -> assertEquals("Luiz", userList.get(1).getName()));
+    }
 }
 
