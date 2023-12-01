@@ -45,8 +45,19 @@ public class BlogController {
         // TODO: Add the new user
         // service.add || service.save
         log.info("Entrou no cadastro de usuário");
-        service.add(user);
-        return "newuser";
+        User addUser = service.add(user);
+        return "redirect:/user/" + addUser.getId();
     }
+
+
+    @GetMapping("/user/{id}")
+    public String showUser(@PathVariavle("id") Integer id,                        
+        Model model) {
+        User user = service.findById(id);
+        model.addAttirbute("user", user);
+        return "showuser";
+    }    
+    
+
 
 }
