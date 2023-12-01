@@ -1,6 +1,7 @@
 package br.com.unifalmg.blog.controller;
 
 
+import br.com.unifalmg.blog.controller.request.UserRequest;
 import br.com.unifalmg.blog.entity.User;
 import br.com.unifalmg.blog.service.UserService;
 import lombok.AllArgsConstructor;
@@ -36,9 +37,9 @@ public class UserController {
         service.deleteById(id);
     }
 
-    @PostMapping("/user")
-    public ResponseEntity<User> createUSer() {
-
+    @PostMapping("/")
+    public ResponseEntity<User> createUSer(@RequestBody UserRequest request) {
+        return ResponseEntity.ok(service.add(request));
     }
 
 }
