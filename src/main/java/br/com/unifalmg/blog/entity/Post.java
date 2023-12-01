@@ -26,7 +26,7 @@ public class Post implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
-
 }

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -51,10 +52,10 @@ public class BlogController {
 
 
     @GetMapping("/user/{id}")
-    public String showUser(@PathVariavle("id") Integer id,                        
+    public String showUser(@PathVariable("id") Integer id,
         Model model) {
         User user = service.findById(id);
-        model.addAttirbute("user", user);
+        model.addAttribute("user", user);
         return "showuser";
     }    
     

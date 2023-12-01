@@ -47,4 +47,8 @@ public class UserService {
         return repository.save(user);
     }
 
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
+    }
+
 }
