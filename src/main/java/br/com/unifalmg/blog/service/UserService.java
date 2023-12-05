@@ -63,4 +63,13 @@ public class UserService {
         return add(user);
     }
 
+    public User edit(User existingUser, UserRequest request) {
+        existingUser.setName(request.getName());
+        existingUser.setUsername(request.getUsername());
+        existingUser.setEmail(request.getEmail());
+        existingUser.setPhone(request.getPhone());
+        existingUser.setWebsite(request.getWebsite());
+        return add(existingUser);
+    }
+
 }

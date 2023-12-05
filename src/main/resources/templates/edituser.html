@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+</head>
+<body>
+<header>
+    <h1>Edit User</h1>
+</header>
+
+<main>
+    <form th:action="@{/user/{id}}" th:object="${user}" method="post">
+        <!-- Adicione o ID do usuário como um parâmetro no URL -->
+        <input type="hidden" th:field="*{id}" />
+
+        <br>
+        <label>
+            Name:
+            <input type="text" id="name" th:field="*{name}"/>
+        </label>
+        <label>
+            Username:
+            <input type="text" id="username" th:field="*{username}"/>
+        </label>
+        <label>
+            Email:
+            <input type="text" id="email" th:field="*{email}"/>
+        </label>
+        <label>
+            Phone:
+            <input type="text" id="phone" th:field="*{phone}"/>
+        </label>
+        <label>
+            Website:
+            <input type="text" id="website" th:field="*{website}"/>
+        </label>
+        <br>
+        <button>Salvar Alterações</button>
+    </form>
+</main>
+</body>
+</html>
