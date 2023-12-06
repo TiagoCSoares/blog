@@ -10,11 +10,10 @@
 </header>
 
 <main>
-    <form th:action="@{/user/{id}}" th:object="${user}" method="post">
-        <!-- Adicione o ID do usuário como um parâmetro no URL -->
-        <input type="hidden" th:field="*{id}" />
+    <form th:action="@{/user/{id}/edit}" th:object="${user}" method="post">
+        <input type="hidden" th:field="*{id}"/> <!-- Adicione este campo oculto para enviar o ID do usuário -->
 
-        <br>
+
         <label>
             Name:
             <input type="text" id="name" th:field="*{name}"/>
@@ -35,8 +34,8 @@
             Website:
             <input type="text" id="website" th:field="*{website}"/>
         </label>
-        <br>
-        <button>Salvar Alterações</button>
+
+        <button>Update</button>
     </form>
 </main>
 </body>

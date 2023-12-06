@@ -57,11 +57,10 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/user/{id}/edit", method = {RequestMethod.POST, RequestMethod.GET})
-    public String editUser(@PathVariable("id") Integer id, @ModelAttribute("user") User updatedUser) {
-        // Recupere o usuário existente do serviço
+    public String processEditUser(@PathVariable("id") Integer id, @ModelAttribute("user") User updatedUser) {
         User existingUser = service.findById(id);
 
-        // Crie um objeto UserRequest com os dados do formulário
+        // Criar um objeto UserRequest com os dados do formulário
         UserRequest userRequest = new UserRequest();
         userRequest.setName(updatedUser.getName());
         userRequest.setUsername(updatedUser.getUsername());
@@ -75,5 +74,13 @@ public class BlogController {
         // Redirecione para a página do usuário editado
         return "redirect:/user/" + editedUser.getId();
     }
+    @GetMapping("/user/{id}/edit")
+    public String showEditUserForm(@PathVariable("id") Integer id, Model model) {
+        User user = service.findById(id);
+        model.addAttribute("user", user);
+        return "edituser";
+    }
+
+
 
 }
